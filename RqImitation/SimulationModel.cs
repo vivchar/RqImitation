@@ -16,6 +16,12 @@ namespace RqImitation
         private List<double> mu2List;
         private List<List<int>> matrixQ;
 
+        private Device device = new Device();
+        private ExternalSpace externalSpace = new ExternalSpace();
+        private IncommingStream incommingStream = new IncommingStream();
+        private RepeatCallsSource repeatCallsSource = new RepeatCallsSource();
+        //RandomEnviroment?
+
         public SimulationModel(double lambda, double beta, double alpha, double gamma, List<double> mu1List, List<double> mu2List, List<List<int>> matrixQ)
         {
             this.lambda = lambda;
