@@ -29,7 +29,11 @@ namespace RqImitation
 
         internal void start(int eventsCount)
         {
-            Console.WriteLine("Starting simulation");
+            ImmitationForm.Log("Starting...");
+            for (int i = 1; i <= eventsCount; i++) {
+                ImmitationForm.Log("Evets count " + i +"/" + eventsCount);
+            }
+            ImmitationForm.Log("Finishing...");
         }
     }
 }

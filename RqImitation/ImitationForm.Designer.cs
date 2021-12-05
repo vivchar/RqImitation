@@ -29,18 +29,13 @@
         private void InitializeComponent()
         {
             this.betaDescriptionLabel = new System.Windows.Forms.Label();
-            this.betaValueLabel = new System.Windows.Forms.Label();
             this.lambdaDescriptionLabel = new System.Windows.Forms.Label();
             this.lambdaNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.lambdaValueLabel = new System.Windows.Forms.Label();
             this.alphaDescriptionLabel = new System.Windows.Forms.Label();
-            this.alphaValueLabel = new System.Windows.Forms.Label();
             this.alphaNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.gammaDescriptionLabel = new System.Windows.Forms.Label();
-            this.gammaValueLabel = new System.Windows.Forms.Label();
             this.gammaNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.stateCountDescriptionLabel = new System.Windows.Forms.Label();
-            this.stateCountValueLabel = new System.Windows.Forms.Label();
             this.stateCountNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.mu1DescriptionLabel = new System.Windows.Forms.Label();
             this.mu2DescriptionLabel = new System.Windows.Forms.Label();
@@ -51,12 +46,15 @@
             this.matrixQDataGridView = new System.Windows.Forms.DataGridView();
             this.startButton = new System.Windows.Forms.Button();
             this.logsListBox = new System.Windows.Forms.ListBox();
+            this.eventsCountLabel = new System.Windows.Forms.Label();
+            this.eventsCountNumericUpDown = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.lambdaNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alphaNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gammaNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stateCountNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.betaNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.matrixQDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventsCountNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // betaDescriptionLabel
@@ -67,15 +65,6 @@
             this.betaDescriptionLabel.Size = new System.Drawing.Size(230, 13);
             this.betaDescriptionLabel.TabIndex = 1;
             this.betaDescriptionLabel.Text = "β - вероятность перехода заявки на орбиту:";
-            // 
-            // betaValueLabel
-            // 
-            this.betaValueLabel.AutoSize = true;
-            this.betaValueLabel.Location = new System.Drawing.Point(248, 49);
-            this.betaValueLabel.Name = "betaValueLabel";
-            this.betaValueLabel.Size = new System.Drawing.Size(22, 13);
-            this.betaValueLabel.TabIndex = 2;
-            this.betaValueLabel.Text = "0.0";
             // 
             // lambdaDescriptionLabel
             // 
@@ -94,7 +83,7 @@
             0,
             0,
             65536});
-            this.lambdaNumericUpDown.Location = new System.Drawing.Point(285, 7);
+            this.lambdaNumericUpDown.Location = new System.Drawing.Point(255, 7);
             this.lambdaNumericUpDown.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -108,34 +97,15 @@
             0,
             0,
             65536});
-            this.lambdaNumericUpDown.ValueChanged += new System.EventHandler(this.lambdeNumericUpDown_ValueChanged);
-            // 
-            // lambdaValueLabel
-            // 
-            this.lambdaValueLabel.AutoSize = true;
-            this.lambdaValueLabel.Location = new System.Drawing.Point(248, 9);
-            this.lambdaValueLabel.Name = "lambdaValueLabel";
-            this.lambdaValueLabel.Size = new System.Drawing.Size(22, 13);
-            this.lambdaValueLabel.TabIndex = 5;
-            this.lambdaValueLabel.Text = "0.0";
             // 
             // alphaDescriptionLabel
             // 
             this.alphaDescriptionLabel.AutoSize = true;
-            this.alphaDescriptionLabel.Location = new System.Drawing.Point(12, 81);
+            this.alphaDescriptionLabel.Location = new System.Drawing.Point(12, 83);
             this.alphaDescriptionLabel.Name = "alphaDescriptionLabel";
             this.alphaDescriptionLabel.Size = new System.Drawing.Size(184, 13);
             this.alphaDescriptionLabel.TabIndex = 6;
             this.alphaDescriptionLabel.Text = "α - интенсивность внешней среды:";
-            // 
-            // alphaValueLabel
-            // 
-            this.alphaValueLabel.AutoSize = true;
-            this.alphaValueLabel.Location = new System.Drawing.Point(248, 81);
-            this.alphaValueLabel.Name = "alphaValueLabel";
-            this.alphaValueLabel.Size = new System.Drawing.Size(22, 13);
-            this.alphaValueLabel.TabIndex = 7;
-            this.alphaValueLabel.Text = "0.0";
             // 
             // alphaNumericUpDown
             // 
@@ -145,7 +115,7 @@
             0,
             0,
             65536});
-            this.alphaNumericUpDown.Location = new System.Drawing.Point(285, 79);
+            this.alphaNumericUpDown.Location = new System.Drawing.Point(255, 81);
             this.alphaNumericUpDown.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -159,25 +129,15 @@
             0,
             0,
             65536});
-            this.alphaNumericUpDown.ValueChanged += new System.EventHandler(this.alphaNumericUpDown_ValueChanged);
             // 
             // gammaDescriptionLabel
             // 
             this.gammaDescriptionLabel.AutoSize = true;
-            this.gammaDescriptionLabel.Location = new System.Drawing.Point(12, 118);
+            this.gammaDescriptionLabel.Location = new System.Drawing.Point(12, 120);
             this.gammaDescriptionLabel.Name = "gammaDescriptionLabel";
             this.gammaDescriptionLabel.Size = new System.Drawing.Size(173, 13);
             this.gammaDescriptionLabel.TabIndex = 9;
             this.gammaDescriptionLabel.Text = "γ - параметр э/р задержки ИПВ:";
-            // 
-            // gammaValueLabel
-            // 
-            this.gammaValueLabel.AutoSize = true;
-            this.gammaValueLabel.Location = new System.Drawing.Point(248, 118);
-            this.gammaValueLabel.Name = "gammaValueLabel";
-            this.gammaValueLabel.Size = new System.Drawing.Size(22, 13);
-            this.gammaValueLabel.TabIndex = 10;
-            this.gammaValueLabel.Text = "0.0";
             // 
             // gammaNumericUpDown
             // 
@@ -187,7 +147,7 @@
             0,
             0,
             65536});
-            this.gammaNumericUpDown.Location = new System.Drawing.Point(285, 116);
+            this.gammaNumericUpDown.Location = new System.Drawing.Point(255, 118);
             this.gammaNumericUpDown.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -201,29 +161,19 @@
             0,
             0,
             65536});
-            this.gammaNumericUpDown.ValueChanged += new System.EventHandler(this.gammaNumericUpDown_ValueChanged);
             // 
             // stateCountDescriptionLabel
             // 
             this.stateCountDescriptionLabel.AutoSize = true;
-            this.stateCountDescriptionLabel.Location = new System.Drawing.Point(12, 155);
+            this.stateCountDescriptionLabel.Location = new System.Drawing.Point(12, 157);
             this.stateCountDescriptionLabel.Name = "stateCountDescriptionLabel";
             this.stateCountDescriptionLabel.Size = new System.Drawing.Size(230, 13);
             this.stateCountDescriptionLabel.TabIndex = 12;
             this.stateCountDescriptionLabel.Text = "S - количество состояний случайной среды:";
             // 
-            // stateCountValueLabel
-            // 
-            this.stateCountValueLabel.AutoSize = true;
-            this.stateCountValueLabel.Location = new System.Drawing.Point(248, 155);
-            this.stateCountValueLabel.Name = "stateCountValueLabel";
-            this.stateCountValueLabel.Size = new System.Drawing.Size(13, 13);
-            this.stateCountValueLabel.TabIndex = 13;
-            this.stateCountValueLabel.Text = "0";
-            // 
             // stateCountNumericUpDown
             // 
-            this.stateCountNumericUpDown.Location = new System.Drawing.Point(285, 153);
+            this.stateCountNumericUpDown.Location = new System.Drawing.Point(255, 155);
             this.stateCountNumericUpDown.Maximum = new decimal(new int[] {
             10,
             0,
@@ -247,7 +197,7 @@
             // mu1DescriptionLabel
             // 
             this.mu1DescriptionLabel.AutoSize = true;
-            this.mu1DescriptionLabel.Location = new System.Drawing.Point(12, 190);
+            this.mu1DescriptionLabel.Location = new System.Drawing.Point(12, 233);
             this.mu1DescriptionLabel.Name = "mu1DescriptionLabel";
             this.mu1DescriptionLabel.Size = new System.Drawing.Size(288, 13);
             this.mu1DescriptionLabel.TabIndex = 15;
@@ -256,7 +206,7 @@
             // mu2DescriptionLabel
             // 
             this.mu2DescriptionLabel.AutoSize = true;
-            this.mu2DescriptionLabel.Location = new System.Drawing.Point(12, 230);
+            this.mu2DescriptionLabel.Location = new System.Drawing.Point(12, 273);
             this.mu2DescriptionLabel.Name = "mu2DescriptionLabel";
             this.mu2DescriptionLabel.Size = new System.Drawing.Size(288, 13);
             this.mu2DescriptionLabel.TabIndex = 16;
@@ -264,17 +214,17 @@
             // 
             // mu2FlowLayoutPanel
             // 
-            this.mu2FlowLayoutPanel.Location = new System.Drawing.Point(306, 225);
+            this.mu2FlowLayoutPanel.Location = new System.Drawing.Point(306, 268);
             this.mu2FlowLayoutPanel.Name = "mu2FlowLayoutPanel";
-            this.mu2FlowLayoutPanel.Size = new System.Drawing.Size(599, 26);
+            this.mu2FlowLayoutPanel.Size = new System.Drawing.Size(665, 26);
             this.mu2FlowLayoutPanel.TabIndex = 17;
             this.mu2FlowLayoutPanel.WrapContents = false;
             // 
             // mu1FlowLayoutPanel
             // 
-            this.mu1FlowLayoutPanel.Location = new System.Drawing.Point(306, 185);
+            this.mu1FlowLayoutPanel.Location = new System.Drawing.Point(306, 228);
             this.mu1FlowLayoutPanel.Name = "mu1FlowLayoutPanel";
-            this.mu1FlowLayoutPanel.Size = new System.Drawing.Size(599, 26);
+            this.mu1FlowLayoutPanel.Size = new System.Drawing.Size(665, 26);
             this.mu1FlowLayoutPanel.TabIndex = 18;
             this.mu1FlowLayoutPanel.WrapContents = false;
             // 
@@ -286,7 +236,7 @@
             0,
             0,
             65536});
-            this.betaNumericUpDown.Location = new System.Drawing.Point(285, 47);
+            this.betaNumericUpDown.Location = new System.Drawing.Point(255, 47);
             this.betaNumericUpDown.Maximum = new decimal(new int[] {
             1,
             0,
@@ -300,12 +250,11 @@
             0,
             0,
             65536});
-            this.betaNumericUpDown.ValueChanged += new System.EventHandler(this.betaNumericUpDown_ValueChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 266);
+            this.label1.Location = new System.Drawing.Point(12, 309);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(126, 13);
             this.label1.TabIndex = 21;
@@ -321,35 +270,64 @@
             this.matrixQDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.matrixQDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.matrixQDataGridView.ColumnHeadersVisible = false;
-            this.matrixQDataGridView.Location = new System.Drawing.Point(306, 266);
+            this.matrixQDataGridView.Location = new System.Drawing.Point(306, 309);
             this.matrixQDataGridView.Name = "matrixQDataGridView";
             this.matrixQDataGridView.RowHeadersVisible = false;
-            this.matrixQDataGridView.Size = new System.Drawing.Size(599, 424);
+            this.matrixQDataGridView.Size = new System.Drawing.Size(665, 424);
             this.matrixQDataGridView.TabIndex = 22;
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(15, 303);
+            this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startButton.Location = new System.Drawing.Point(397, 654);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(103, 38);
+            this.startButton.Size = new System.Drawing.Size(179, 38);
             this.startButton.TabIndex = 23;
-            this.startButton.Text = "START";
+            this.startButton.Text = "START SIMULATION";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // logsListBox
             // 
             this.logsListBox.FormattingEnabled = true;
-            this.logsListBox.Location = new System.Drawing.Point(411, 7);
+            this.logsListBox.Location = new System.Drawing.Point(381, 7);
             this.logsListBox.Name = "logsListBox";
-            this.logsListBox.Size = new System.Drawing.Size(560, 160);
+            this.logsListBox.Size = new System.Drawing.Size(590, 212);
             this.logsListBox.TabIndex = 25;
+            // 
+            // eventsCountLabel
+            // 
+            this.eventsCountLabel.AutoSize = true;
+            this.eventsCountLabel.Location = new System.Drawing.Point(12, 195);
+            this.eventsCountLabel.Name = "eventsCountLabel";
+            this.eventsCountLabel.Size = new System.Drawing.Size(115, 13);
+            this.eventsCountLabel.TabIndex = 26;
+            this.eventsCountLabel.Text = "Количество событий:";
+            // 
+            // eventsCountNumericUpDown
+            // 
+            this.eventsCountNumericUpDown.Location = new System.Drawing.Point(255, 193);
+            this.eventsCountNumericUpDown.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.eventsCountNumericUpDown.Name = "eventsCountNumericUpDown";
+            this.eventsCountNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.eventsCountNumericUpDown.TabIndex = 27;
+            this.eventsCountNumericUpDown.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // ImmitationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(983, 723);
+            this.Controls.Add(this.eventsCountNumericUpDown);
+            this.Controls.Add(this.eventsCountLabel);
             this.Controls.Add(this.logsListBox);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.matrixQDataGridView);
@@ -360,18 +338,13 @@
             this.Controls.Add(this.mu2DescriptionLabel);
             this.Controls.Add(this.mu1DescriptionLabel);
             this.Controls.Add(this.stateCountNumericUpDown);
-            this.Controls.Add(this.stateCountValueLabel);
             this.Controls.Add(this.stateCountDescriptionLabel);
             this.Controls.Add(this.gammaNumericUpDown);
-            this.Controls.Add(this.gammaValueLabel);
             this.Controls.Add(this.gammaDescriptionLabel);
             this.Controls.Add(this.alphaNumericUpDown);
-            this.Controls.Add(this.alphaValueLabel);
             this.Controls.Add(this.alphaDescriptionLabel);
-            this.Controls.Add(this.lambdaValueLabel);
             this.Controls.Add(this.lambdaNumericUpDown);
             this.Controls.Add(this.lambdaDescriptionLabel);
-            this.Controls.Add(this.betaValueLabel);
             this.Controls.Add(this.betaDescriptionLabel);
             this.Name = "ImmitationForm";
             this.Text = "RQ System Immitation";
@@ -382,6 +355,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.stateCountNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.betaNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.matrixQDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eventsCountNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -390,18 +364,13 @@
         #endregion
 
         private System.Windows.Forms.Label betaDescriptionLabel;
-        private System.Windows.Forms.Label betaValueLabel;
         private System.Windows.Forms.Label lambdaDescriptionLabel;
         private System.Windows.Forms.NumericUpDown lambdaNumericUpDown;
-        private System.Windows.Forms.Label lambdaValueLabel;
         private System.Windows.Forms.Label alphaDescriptionLabel;
-        private System.Windows.Forms.Label alphaValueLabel;
         private System.Windows.Forms.NumericUpDown alphaNumericUpDown;
         private System.Windows.Forms.Label gammaDescriptionLabel;
-        private System.Windows.Forms.Label gammaValueLabel;
         private System.Windows.Forms.NumericUpDown gammaNumericUpDown;
         private System.Windows.Forms.Label stateCountDescriptionLabel;
-        private System.Windows.Forms.Label stateCountValueLabel;
         private System.Windows.Forms.NumericUpDown stateCountNumericUpDown;
         private System.Windows.Forms.Label mu1DescriptionLabel;
         private System.Windows.Forms.Label mu2DescriptionLabel;
@@ -412,6 +381,8 @@
         private System.Windows.Forms.DataGridView matrixQDataGridView;
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.ListBox logsListBox;
+        private System.Windows.Forms.Label eventsCountLabel;
+        private System.Windows.Forms.NumericUpDown eventsCountNumericUpDown;
     }
 }
 

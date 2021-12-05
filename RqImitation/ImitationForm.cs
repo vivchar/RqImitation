@@ -22,31 +22,7 @@ namespace RqImitation
         private void Form1_Load(object sender, EventArgs e)
         {
             logsList = logsListBox;
-            updateBeta();
-            updateLambda();
-            updateAlpha();
-            updateGamma();
             updateStateCount();
-        }
-
-        private void betaNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            updateBeta();
-        }
-
-        private void lambdeNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            updateLambda();
-        }
-
-        private void alphaNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            updateAlpha();
-        }
-
-        private void gammaNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            updateGamma();
         }
 
         private void stateCountNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -54,29 +30,8 @@ namespace RqImitation
             updateStateCount();
         }
 
-        private void updateBeta()
-        {
-            betaValueLabel.Text = betaNumericUpDown.Value.ToString();
-        }
-
-        private void updateLambda()
-        {
-            lambdaValueLabel.Text = lambdaNumericUpDown.Value.ToString();
-        }
-
-        private void updateAlpha()
-        {
-            alphaValueLabel.Text = alphaNumericUpDown.Value.ToString();
-        }
-
-        private void updateGamma()
-        {
-            gammaValueLabel.Text = gammaNumericUpDown.Value.ToString();
-        }
-
         private void updateStateCount()
         {
-            stateCountValueLabel.Text = stateCountNumericUpDown.Value.ToString();
             updateMu1List();
             updateMu2List();
             updateQMatrix();
@@ -108,7 +63,7 @@ namespace RqImitation
             matrixQDataGridView.ColumnCount = stateCount;
             
             for (int i = 0; i < stateCount; i++) {
-                matrixQDataGridView.Columns[i].Width = 50;
+                matrixQDataGridView.Columns[i].Width = 25;
                 var row = matrixQDataGridView.Rows[i];
                 for (int j = 0; j < stateCount; j++)
                 {
@@ -130,7 +85,6 @@ namespace RqImitation
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            Log("Starting simulation...");
             double lambda = (double)lambdaNumericUpDown.Value;
             double beta = (double)betaNumericUpDown.Value;
             double alpha = (double)alphaNumericUpDown.Value;
@@ -143,14 +97,15 @@ namespace RqImitation
             List<List<int>> matrixQ = getMatrixQ();
 
             var simulation = new SimulationModel(lambda, beta, alpha, gamma, mu1List, mu2List, matrixQ);
-            simulation.start(10);
-            Log("Finishing simulation...");
-
+            simulation.start((int)eventsCountNumericUpDown.Value);
         }
 
         public static void Log(string message) {
             Debug.WriteLine(message);
             logsList.Items.Add(message);
+
+            logsList.SelectedIndex = logsList.Items.Count - 1;
+            logsList.SelectedIndex = -1;
         }
 
         public List<double> getMu1List()
