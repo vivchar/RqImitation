@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace RqImitation
 {
     public partial class ImmitationForm : Form
     {
+        private static ListBox logsList;
         public ImmitationForm()
         {
             InitializeComponent();
@@ -19,6 +21,7 @@ namespace RqImitation
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            logsList = logsListBox;
             updateBeta();
             updateLambda();
             updateAlpha();
@@ -87,6 +90,7 @@ namespace RqImitation
                 mu2FlowLayoutPanel.Controls.Add(createNumericUpDown());
             }
         }
+
         private void updateMu1List()
         {
             mu1FlowLayoutPanel.Controls.Clear();
@@ -126,7 +130,70 @@ namespace RqImitation
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            Log("Starting simulation...");
+            double lambda = (double)lambdaNumericUpDown.Value;
+            double beta = (double)betaNumericUpDown.Value;
+            double alpha = (double)alphaNumericUpDown.Value;
+            double gamma = (double)gammaNumericUpDown.Value;
+            int stateCount = (int)stateCountNumericUpDown.Value;
 
+            List<double> mu1List = getMu1List();
+            List<double> mu2List = getMu2List();
+
+            List<List<int>> matrixQ = getMatrixQ();
+
+            var simulation = new SimulationModel(lambda, beta, alpha, gamma, mu1List, mu2List, matrixQ);
+            simulation.start(10);
+            Log("Finishing simulation...");
+
+        }
+
+        public static void Log(string message) {
+            Debug.WriteLine(message);
+            logsList.Items.Add(message);
+        }
+
+        public List<double> getMu1List()
+        {
+            List<double> list = new List<double>();
+            foreach (NumericUpDown c in mu1FlowLayoutPanel.Controls)
+            {
+                list.Add((double)c.Value);
+            }
+
+            return list;
+        }
+
+        public List<double> getMu2List()
+        {
+            List<double> list = new List<double>();
+            foreach (NumericUpDown c in mu2FlowLayoutPanel.Controls)
+            {
+                list.Add((double)c.Value);
+            }
+
+            return list;
+        }
+
+        public List<List<int>> getMatrixQ() {
+            List<List<int>> matrix = new List<List<int>>(); 
+
+            int stateCount = matrixQDataGridView.RowCount;
+
+            for (int rowIndex = 0; rowIndex < stateCount; rowIndex++)
+            {
+                var rowView = matrixQDataGridView.Rows[rowIndex];
+             
+                List<int> list = new List<int>();
+                for (int columnIndex = 0; columnIndex < stateCount; columnIndex++)
+                {
+                    list.Add((int)rowView.Cells[columnIndex].Value);
+                }
+                matrix.Add(list);
+            }
+
+
+            return matrix;
         }
     }
 }

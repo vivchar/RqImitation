@@ -50,6 +50,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.matrixQDataGridView = new System.Windows.Forms.DataGridView();
             this.startButton = new System.Windows.Forms.Button();
+            this.logsListBox = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.lambdaNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alphaNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gammaNumericUpDown)).BeginInit();
@@ -336,11 +337,20 @@
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
+            // logsListBox
+            // 
+            this.logsListBox.FormattingEnabled = true;
+            this.logsListBox.Location = new System.Drawing.Point(411, 7);
+            this.logsListBox.Name = "logsListBox";
+            this.logsListBox.Size = new System.Drawing.Size(560, 160);
+            this.logsListBox.TabIndex = 25;
+            // 
             // ImmitationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(983, 723);
+            this.Controls.Add(this.logsListBox);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.matrixQDataGridView);
             this.Controls.Add(this.label1);
@@ -401,6 +411,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView matrixQDataGridView;
         private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.ListBox logsListBox;
     }
 }
 
