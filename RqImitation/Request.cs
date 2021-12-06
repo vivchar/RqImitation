@@ -8,5 +8,15 @@ namespace RqImitation
 {
     internal class Request
     {
+        private double time = 0;
+
+        public Request(double time)
+        {
+            this.time = time;
+        }
+
+        internal double getTime() { 
+            return time;
+        }
     }
 }

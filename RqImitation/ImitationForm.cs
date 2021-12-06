@@ -85,6 +85,8 @@ namespace RqImitation
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            logsList.Items.Clear(); //ощищаем лог предыдущей имитации
+
             double lambda = (double)lambdaNumericUpDown.Value;
             double beta = (double)betaNumericUpDown.Value;
             double alpha = (double)alphaNumericUpDown.Value;
@@ -96,8 +98,8 @@ namespace RqImitation
 
             List<List<int>> matrixQ = getMatrixQ();
 
-            var simulation = new SimulationModel(lambda, beta, alpha, gamma, mu1List, mu2List, matrixQ);
-            simulation.start((int)eventsCountNumericUpDown.Value);
+            var imitation = new ImitationModel(lambda, beta, alpha, gamma, mu1List, mu2List, matrixQ);
+            imitation.start((int)eventsCountNumericUpDown.Value);
         }
 
         public static void Log(string message) {

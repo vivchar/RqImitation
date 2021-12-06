@@ -60,7 +60,7 @@
             // betaDescriptionLabel
             // 
             this.betaDescriptionLabel.AutoSize = true;
-            this.betaDescriptionLabel.Location = new System.Drawing.Point(12, 49);
+            this.betaDescriptionLabel.Location = new System.Drawing.Point(12, 82);
             this.betaDescriptionLabel.Name = "betaDescriptionLabel";
             this.betaDescriptionLabel.Size = new System.Drawing.Size(230, 13);
             this.betaDescriptionLabel.TabIndex = 1;
@@ -71,9 +71,9 @@
             this.lambdaDescriptionLabel.AutoSize = true;
             this.lambdaDescriptionLabel.Location = new System.Drawing.Point(12, 9);
             this.lambdaDescriptionLabel.Name = "lambdaDescriptionLabel";
-            this.lambdaDescriptionLabel.Size = new System.Drawing.Size(199, 13);
+            this.lambdaDescriptionLabel.Size = new System.Drawing.Size(202, 13);
             this.lambdaDescriptionLabel.TabIndex = 4;
-            this.lambdaDescriptionLabel.Text = "λ - параметр пуассоновского потока: ";
+            this.lambdaDescriptionLabel.Text = "λ - интенсивносить входящего потока:";
             // 
             // lambdaNumericUpDown
             // 
@@ -93,7 +93,7 @@
             this.lambdaNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.lambdaNumericUpDown.TabIndex = 1;
             this.lambdaNumericUpDown.Value = new decimal(new int[] {
-            15,
+            12,
             0,
             0,
             65536});
@@ -101,7 +101,7 @@
             // alphaDescriptionLabel
             // 
             this.alphaDescriptionLabel.AutoSize = true;
-            this.alphaDescriptionLabel.Location = new System.Drawing.Point(12, 83);
+            this.alphaDescriptionLabel.Location = new System.Drawing.Point(12, 45);
             this.alphaDescriptionLabel.Name = "alphaDescriptionLabel";
             this.alphaDescriptionLabel.Size = new System.Drawing.Size(184, 13);
             this.alphaDescriptionLabel.TabIndex = 6;
@@ -115,7 +115,7 @@
             0,
             0,
             65536});
-            this.alphaNumericUpDown.Location = new System.Drawing.Point(255, 81);
+            this.alphaNumericUpDown.Location = new System.Drawing.Point(255, 43);
             this.alphaNumericUpDown.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -125,7 +125,7 @@
             this.alphaNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.alphaNumericUpDown.TabIndex = 8;
             this.alphaNumericUpDown.Value = new decimal(new int[] {
-            4,
+            8,
             0,
             0,
             65536});
@@ -236,7 +236,7 @@
             0,
             0,
             65536});
-            this.betaNumericUpDown.Location = new System.Drawing.Point(255, 47);
+            this.betaNumericUpDown.Location = new System.Drawing.Point(255, 80);
             this.betaNumericUpDown.Maximum = new decimal(new int[] {
             1,
             0,

@@ -46,15 +46,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Device.cs" />
+    <Compile Include="ExternalStream.cs" />
     <Compile Include="ImitationForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ImitationForm.Designer.cs">
       <DependentUpon>ImitationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="IncommingStream.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimulationModel.cs" />
+    <Compile Include="RepeatStream.cs" />
+    <Compile Include="Request.cs" />
+    <Compile Include="ImitationModel.cs" />
     <EmbeddedResource Include="ImitationForm.resx">
       <DependentUpon>ImitationForm.cs</DependentUpon>
     </EmbeddedResource>
