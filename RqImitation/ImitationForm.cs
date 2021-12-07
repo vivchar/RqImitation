@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace RqImitation
 {
-    public partial class ImmitationForm : Form
+    public partial class ImitationForm : Form
     {
         private static ListBox logsList;
-        public ImmitationForm()
+        public ImitationForm()
         {
             InitializeComponent();
         }
@@ -79,7 +79,7 @@ namespace RqImitation
             nup.Width = 50;
             nup.Increment = 0.1M;
             nup.DecimalPlaces = 1;
-            nup.Value = 0.2M;
+            nup.Value = 0.8M; //дефолтное значение для мю списка
             return nup;
         }
 
@@ -144,7 +144,7 @@ namespace RqImitation
                 List<int> list = new List<int>();
                 for (int columnIndex = 0; columnIndex < stateCount; columnIndex++)
                 {
-                    list.Add((int)rowView.Cells[columnIndex].Value);
+                    list.Add(int.Parse(rowView.Cells[columnIndex].Value.ToString()));
                 }
                 matrix.Add(list);
             }

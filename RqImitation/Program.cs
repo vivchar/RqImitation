@@ -16,7 +16,7 @@ namespace RqImitation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ImmitationForm());
+            Application.Run(new ImitationForm());
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace RqImitation
 {
-    partial class ImmitationForm
+    partial class ImitationForm
     {
         /// <summary>
         /// Required designer variable.
@@ -199,32 +199,32 @@
             this.mu1DescriptionLabel.AutoSize = true;
             this.mu1DescriptionLabel.Location = new System.Drawing.Point(12, 233);
             this.mu1DescriptionLabel.Name = "mu1DescriptionLabel";
-            this.mu1DescriptionLabel.Size = new System.Drawing.Size(288, 13);
+            this.mu1DescriptionLabel.Size = new System.Drawing.Size(305, 13);
             this.mu1DescriptionLabel.TabIndex = 15;
-            this.mu1DescriptionLabel.Text = "μ1 - параметр э/р длительности обслуживания заявки:";
+            this.mu1DescriptionLabel.Text = "μ1 - параметр э/р длительности обслуживания вх. заявки:";
             // 
             // mu2DescriptionLabel
             // 
             this.mu2DescriptionLabel.AutoSize = true;
             this.mu2DescriptionLabel.Location = new System.Drawing.Point(12, 273);
             this.mu2DescriptionLabel.Name = "mu2DescriptionLabel";
-            this.mu2DescriptionLabel.Size = new System.Drawing.Size(288, 13);
+            this.mu2DescriptionLabel.Size = new System.Drawing.Size(314, 13);
             this.mu2DescriptionLabel.TabIndex = 16;
-            this.mu2DescriptionLabel.Text = "μ2 - параметр э/р длительности обслуживания заявки:";
+            this.mu2DescriptionLabel.Text = "μ2 - параметр э/р длительности обслуживания выз. заявки:";
             // 
             // mu2FlowLayoutPanel
             // 
-            this.mu2FlowLayoutPanel.Location = new System.Drawing.Point(306, 268);
+            this.mu2FlowLayoutPanel.Location = new System.Drawing.Point(334, 268);
             this.mu2FlowLayoutPanel.Name = "mu2FlowLayoutPanel";
-            this.mu2FlowLayoutPanel.Size = new System.Drawing.Size(665, 26);
+            this.mu2FlowLayoutPanel.Size = new System.Drawing.Size(637, 26);
             this.mu2FlowLayoutPanel.TabIndex = 17;
             this.mu2FlowLayoutPanel.WrapContents = false;
             // 
             // mu1FlowLayoutPanel
             // 
-            this.mu1FlowLayoutPanel.Location = new System.Drawing.Point(306, 228);
+            this.mu1FlowLayoutPanel.Location = new System.Drawing.Point(334, 228);
             this.mu1FlowLayoutPanel.Name = "mu1FlowLayoutPanel";
-            this.mu1FlowLayoutPanel.Size = new System.Drawing.Size(665, 26);
+            this.mu1FlowLayoutPanel.Size = new System.Drawing.Size(637, 26);
             this.mu1FlowLayoutPanel.TabIndex = 18;
             this.mu1FlowLayoutPanel.WrapContents = false;
             // 
@@ -321,7 +321,7 @@
             0,
             0});
             // 
-            // ImmitationForm
+            // ImitationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -346,7 +346,7 @@
             this.Controls.Add(this.lambdaNumericUpDown);
             this.Controls.Add(this.lambdaDescriptionLabel);
             this.Controls.Add(this.betaDescriptionLabel);
-            this.Name = "ImmitationForm";
+            this.Name = "ImitationForm";
             this.Text = "RQ System Immitation";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.lambdaNumericUpDown)).EndInit();

@@ -41,12 +41,12 @@ namespace RqImitation
             return requestToRemove;
         }
 
-        internal void addRequest(Request request)
+        internal void addRequest(bool isIncomming, Request request, int state)
         {
-            //double mu1Time = Math.Abs(Math.Log(random.NextDouble()) / mu1List.FirstOrDefault());
-            //переделать на эксп, должно зависеть от куда заявка, плюс разные состояния прибора
-            double mu1Time = random.NextDouble();
-            this.request = new Request(request.getTime() + mu1Time);
+            //если заявка из входящего потока или из входящего ИПВ, то используем параметр mu1, если это заявка вызываемая заявка из внешней среды, то используем параметр mu2
+            double parameter = isIncomming ? mu1List[state] : mu2List[state];
+            double time = Math.Abs(Math.Log(random.NextDouble()) / parameter);
+            this.request = new Request(request.getTime() + time);
         }
 
         internal int getProcessedRequestsCount()

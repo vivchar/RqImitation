@@ -8,14 +8,7 @@ namespace RqImitation
 {
     internal class ImitationModel
     {
-
-        private double lambda;
         private double beta;
-        private double alpha;
-        private double gamma;
-        private List<double> mu1List;
-        private List<double> mu2List;
-        private List<List<int>> matrixQ;
 
         private Random random = new Random();
 
@@ -23,115 +16,127 @@ namespace RqImitation
         private ExternalStream externalStream;
         private IncommingStream incommingStream;
         private RepeatStream repeatStream;
+        private RandomEnviroment randomEnviroment;
 
-        //RandomEnviroment?
         double currentTime = 0;
-        int currentState = 0;
 
         public ImitationModel(double lambda, double beta, double alpha, double gamma, List<double> mu1List, List<double> mu2List, List<List<int>> matrixQ)
         {
-
-
-            this.lambda = lambda;
             this.beta = beta;
-            this.alpha = alpha;
-            this.gamma = gamma;
-            this.mu1List = mu1List;
-            this.mu2List = mu2List;
-            this.matrixQ = matrixQ;
 
             incommingStream = new IncommingStream(random, lambda);
             repeatStream = new RepeatStream(random, gamma);
             externalStream = new ExternalStream(random, alpha);
             device = new Device(random, mu1List, mu2List);
+            randomEnviroment = new RandomEnviroment(random, matrixQ);
         }
 
         internal void start(int eventsCount)
         {
-            ImmitationForm.Log("Starting...");
-            ImmitationForm.Log("");
+            ImitationForm.Log("Starting...");
+            ImitationForm.Log("");
             for (int i = 1; i <= eventsCount; i++) {
 
+                double randomEnviromentEventTime = randomEnviroment.getEventTime();
                 double incommingEventTime = incommingStream.getEventTime();
-                ImmitationForm.Log("Incomming event time:\t\t\t\t" + incommingEventTime);
-
                 double repeatEventTime = repeatStream.getEventTime();
-                ImmitationForm.Log("Repeat event time:\t\t\t\t\t" + repeatEventTime);
-
                 double deviceFinishEventTime = device.getEventTime();
-                ImmitationForm.Log("Device finish event time:\t\t\t\t" + deviceFinishEventTime);
-
                 double externalEventTime = device.isBusy() ? double.MaxValue : externalStream.getEventTime(currentTime);
-                ImmitationForm.Log("External event time:\t\t\t\t" + externalEventTime);
+                
+                ImitationForm.Log("Random time:\t\t" + mapToUserFriendlyTime(randomEnviromentEventTime));
+                ImitationForm.Log("Incomming time:\t\t" + mapToUserFriendlyTime(incommingEventTime));
+                ImitationForm.Log("Repeat time:\t\t" + mapToUserFriendlyTime(repeatEventTime));
+                ImitationForm.Log("Device time:\t\t" + mapToUserFriendlyTime(deviceFinishEventTime));
+                ImitationForm.Log("External time:\t\t" + mapToUserFriendlyTime(externalEventTime));
 
-                var timeList = new List<double>();
+                var timeList = new List<double>(); //добавляем времена событий в список, чтобы достать наименьшее/ближайшее
                 timeList.Add(incommingEventTime);
                 timeList.Add(repeatEventTime);
                 timeList.Add(deviceFinishEventTime);
                 timeList.Add(externalEventTime);
+                timeList.Add(randomEnviromentEventTime);
 
                 currentTime = timeList.Min(); //переключаемся на ближайшее событие, это и есть текущее время
 
                 if (currentTime == incommingEventTime) { //обрабатываем событие из входящего потока заявок
-                    ImmitationForm.Log("Incomming event time!");
+                    ImitationForm.Log("\tIncomming event time!");
                     var incommingRequest = incommingStream.getRequest();
-                    callDeviceWithRequest(incommingRequest);
+                    callDeviceWithIncommingRequest(incommingRequest);
                 }
 
-                if (currentTime == repeatEventTime) {
-                    ImmitationForm.Log("Repeate event time!");
+                if (currentTime == repeatEventTime) { //обрабатываем событие из источника повторных вызовов
+                    ImitationForm.Log("\tRepeate event time!");
                     Request repeatRequest = repeatStream.getRequest();
-                    callDeviceWithRequest(repeatRequest);
+                    callDeviceWithIncommingRequest(repeatRequest);
                 }
 
-                if (currentTime == deviceFinishEventTime) {
-                    ImmitationForm.Log("Device finish event time!");
+                if (currentTime == deviceFinishEventTime) { //обрабатываем событие завершения работы прибора
+                    ImitationForm.Log("\tDevice finish event time!");
                     Request finishedRequest = device.removeRequest();
                     processFinishedRequest(finishedRequest);
                 }
 
-                if (currentTime == externalEventTime) {
-                    ImmitationForm.Log("External event time!");
+                if (currentTime == externalEventTime) { //обрабатываем событие когда прибор свободен и он обратился к внешнему источнику заявок
+                    ImitationForm.Log("\tExternal event time!");
                     Request externalRequest = externalStream.getRequest();
-                    callDeviceWithRequest(externalRequest);
+                    callDeviceWithOutgoingRequest(externalRequest);
                 }
 
-                ImmitationForm.Log(
-                    "Total events count: " + i + "/" + eventsCount 
-                    + " Incoming: " + incommingStream.getProcessedRequestsCount() 
-                    + ", Repeat: " + repeatStream.getProcessedEventCount()
-                    + ", Device: " + device.getProcessedRequestsCount()
-                    + ", External: " + externalStream.getProcessedRequestsCount()
+                if (currentTime == randomEnviromentEventTime) { //обрабатываем событие смены состояния случайной среды
+                    ImitationForm.Log("\tRandom enviroment event time! " + randomEnviroment.getState());
+                    randomEnviroment.generateNextState();
+                }
+
+                ImitationForm.Log(
+                    "Total events count:" + i + "/" + eventsCount
+                    + ", Random:" + randomEnviroment.getProcessedRequestsCount()
+                    + ", Incoming:" + incommingStream.getProcessedRequestsCount() 
+                    + ", Repeat:" + repeatStream.getProcessedEventCount()
+                    + ", Device:" + device.getProcessedRequestsCount()
+                    + ", External:" + externalStream.getProcessedRequestsCount()
                 );
 
-                ImmitationForm.Log("");
+                ImitationForm.Log("");
             }
-            ImmitationForm.Log("Finishing...");
+            ImitationForm.Log("Finishing...");
+        }
+
+        private String mapToUserFriendlyTime(double time) {
+            //выводив в удобном виде для восприятия
+            return time == double.MaxValue ? "ꝏ" : string.Format("{0:N3}", time);
         }
 
         private void processFinishedRequest(Request request) {
-            bool willLeftSystem = random.NextDouble() < beta; //рассчитываем вероятность (1 - B), что заявка покинет систему
+            bool willLeftSystem = random.NextDouble() > beta; //рассчитываем вероятность (1 - B), что заявка покинет систему
             if (willLeftSystem)
             {
-                ImmitationForm.Log("Request left a system.");
+                ImitationForm.Log("\t\tRequest left a system.");
             }
             else
             {
-                ImmitationForm.Log("Request can't left a system. Moving to RS. RS contains " + repeatStream.getRequestsCount() + "(+1) requests.");
+                ImitationForm.Log("\t\tRequest can't left a system. Moving to RS. RS contains " + repeatStream.getRequestsCount() + "(+1) requests.");
                 repeatStream.addRequest(request); //помещаем заявку в ИПВ, назначаем новое время
             }
         }
 
-        private void callDeviceWithRequest(Request request) {
+        private void callDeviceWithOutgoingRequest(Request request) {
+            callDeviceWithRequest(false, request);
+        }
+
+        private void callDeviceWithIncommingRequest(Request request) {
+            callDeviceWithRequest(true, request);
+        }
+
+        private void callDeviceWithRequest(bool isIncomming, Request request) {
             if (device.isBusy()) //проверяем занят ли девайс
             {
-                ImmitationForm.Log("Device is busy. Moving to RS. RS contains " + repeatStream.getRequestsCount() + "(+1) requests.");
+                ImitationForm.Log("\t\tDevice is busy. Moving to RS. RS contains " + repeatStream.getRequestsCount() + "(+1) requests.");
                 repeatStream.addRequest(request); //если занят, помещаем заявку в ИПВ, назначаем новое время
             }
             else
             {
-                ImmitationForm.Log("Device is free, starting process...");
-                device.addRequest(request); //если свободен, передаем на обработку в прибор
+                ImitationForm.Log("\t\tDevice is free, starting process...");
+                device.addRequest(isIncomming, request, randomEnviroment.getState()); //если свободен, передаем на обработку в прибор, передаем текущее состояние случайной среды
             }
         }
     }
