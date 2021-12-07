@@ -17,6 +17,8 @@ namespace RqImitation
 
         private int processedRequestsCount = 0; //для статистики
 
+        private int deviceState = 0; //состояние девайса 0,1,2
+
         public Device(Random random, List<double> mu1List, List<double> mu2List)
         {
             this.random = random;
@@ -29,22 +31,24 @@ namespace RqImitation
             return request != null;
         }
 
-        internal double getEventTime()
+        internal double getEventTime() //время когда девайс завершит работу, если он свободен, то бесконечность
         {
             return request != null ? request.getTime() : double.MaxValue;
         }
 
-        internal Request removeRequest()
+        internal Request removeRequest() //забирает заявку из прибора
         {
             var requestToRemove = request;
             request = null;
+            deviceState = 0;
             processedRequestsCount++;
             return requestToRemove;
         }
 
-        internal void addRequest(bool isIncomming, Request request, int state)
+        internal void addRequest(bool isIncomming, Request request, int state) //функция передачи заявки на обработку в устройство
         {
-            //если заявка из входящего потока или из входящего ИПВ, то используем параметр mu1, если это заявка вызываемая заявка из внешней среды, то используем параметр mu2
+            deviceState = isIncomming ? 1 : 2;
+            //если заявка из входящего потока или из ИПВ, то используем параметр mu1, если это заявка вызываемая заявка из внешней среды, то используем параметр mu2
             double parameter = isIncomming ? mu1List[state] : mu2List[state];
             double time = Math.Abs(Math.Log(random.NextDouble()) / parameter);
             this.request = new Request(request.getTime() + time);
