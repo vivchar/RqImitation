@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace RqImitation
 {
+    //источник повторных вызовов
     internal class RepeatStream
     {
         private Random random;
         private double gamma;
         private List<Request> requests = new List<Request>();
-        private int processedEventCount = 0;
+        private int processedEventCount = 0; //для статистики
 
         public RepeatStream(Random random, double gamma)
         {
@@ -28,9 +29,10 @@ namespace RqImitation
             return requests.Any() ? requests.Min(it => it.getTime()) : double.MaxValue; //выбираем ближайшую заявку с минимальным временем
         }
 
-        internal void addRequest(Request request)
+        internal void addRequest(Request request) //добавляет заявку в ИПВ и генерирует случайную задержку для повторного вызова
         {
-            double randomDelay = random.NextDouble(); //todo use exp and gamma param
+            double randomDelay = Math.Abs(Math.Log(random.NextDouble()) / gamma);
+            //double randomDelay = random.NextDouble();
             requests.Add(new Request(request.getTime() + randomDelay));
         }
 
@@ -38,12 +40,12 @@ namespace RqImitation
             return requests.Count();
         }
 
-        internal Request getRequest()
+        internal Request getRequest() 
         {
             //изымаем ближайшую заявку с минимальным временем
             Request request = requests.Find(it => it.getTime() == getEventTime());
             requests.Remove(request);
-            processedEventCount++; //увеличиваем число обработанных заявок
+            processedEventCount++; //увеличиваем число обработанных заявок, для статистики
             return request;
         }
 

@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace RqImitation
 {
+    //прибор
     internal class Device
     {
         private Request request = null;
 
         private Random random;
-        private List<double> mu1List;
-        private List<double> mu2List;
+        private List<double> mu1List; //список мю для входящих заявок, зависит от числа состояний случайной среды S
+        private List<double> mu2List; //список мю для вызываемых заявок, зависит от числа состояний случайной среды S
 
-        private int processedRequestsCount = 0;
+        private int processedRequestsCount = 0; //для статистики
 
         public Device(Random random, List<double> mu1List, List<double> mu2List)
         {

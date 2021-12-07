@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RqImitation
 {
+    //класс описывающий заявку
     internal class Request
     {
         private double time = 0;

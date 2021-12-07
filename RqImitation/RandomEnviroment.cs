@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace RqImitation
 {
+    //случайная среда, которая имеет S состояний, матрица SxS
     internal class RandomEnviroment
     {
         private Random random;
-        private List<List<int>> matrixQ;
-        private List<List<double>> matrixTransitions = new List<List<double>>();
+        private List<List<int>> matrixQ; //матрица переходов
+        private List<List<double>> matrixTransitions = new List<List<double>>();//матрица переходов вероятностей
         private int state = 0; //текущее состояние среды
         private int nextState = 0; //следующее состояние среды
-        private double eventTime = 0;
-        private int processedEventsCount = 0;
+        private double eventTime = 0;//когда наступит следующее событие
+        private int processedEventsCount = 0;//для статистики
 
         public RandomEnviroment(Random random, List<List<int>> matrixQ)
         {
@@ -52,13 +53,13 @@ namespace RqImitation
             return eventTime;
         }
 
-        internal void generateNextEvent()
+        internal void generateNextEvent() //генерируем следующее событие
         {
-            state = nextState;
+            state = nextState; //в текущее событие записываем
             eventTime = eventTime + Math.Log(random.NextDouble()) / matrixQ[state][state];
 
             nextState = 0;
-            double A = random.NextDouble() - matrixTransitions[state][nextState];
+            double A = random.NextDouble() - matrixTransitions[state][nextState]; //высчитываем вероятность и какое событие будет следующее
             while (A > 0)
             {
                 nextState++;
@@ -71,7 +72,7 @@ namespace RqImitation
             return processedEventsCount;
         }
 
-        internal int getState()
+        internal int getState() //текущее состояние случайной среды
         {
             return state;
         }

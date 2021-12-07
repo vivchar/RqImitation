@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace RqImitation
 {
+    //поток внешней среды для вызовов заявок
     internal class ExternalStream
     {
         private Random random;
         private double alpha;
         private double eventTime = 0;
-        private int processedRequestsCount = 0;
+        private int processedRequestsCount = 0; //для статистики, число обработанных событий
 
         public ExternalStream(Random random, double alpha)
         {
@@ -37,6 +38,7 @@ namespace RqImitation
         internal Request getRequest()
         {
             processedRequestsCount++;
+            //не генерируем сл событие, так как зависим от занятости девайса и времени
             return new Request(eventTime);
         }
     }
