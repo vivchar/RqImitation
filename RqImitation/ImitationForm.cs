@@ -118,6 +118,7 @@ namespace RqImitation
             logsList.DataSource = logs;
             logsList.EndUpdate();   
             logsList.SelectedIndex = logsList.Items.Count - 1;
+            logsList.SelectedIndex = -1;
         }
 
         public List<double> getMu1List()

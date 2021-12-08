@@ -39,7 +39,7 @@ namespace RqImitation
 
         internal Request getRequest() //возвращает-извлекает заявку для текушего времени
         {
-            var request = new Request(eventTime);
+            var request = new Request(eventTime); //создаем новую заявку, которая пришла из входящего потока, устанавливаем время - это время обращения заявки к прибору
             generateNextEvent(); //после того как взяли заявку для данного времени - генерируем новое время заявки
             processedRequestsCount++; //увеличиваем число обработанных заявок
             return request;

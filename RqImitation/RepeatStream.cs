@@ -33,18 +33,25 @@ namespace RqImitation
         {
             double randomDelay = Math.Abs(Math.Log(random.NextDouble()) / gamma);
             //double randomDelay = random.NextDouble();
-            requests.Add(new Request(request.getTime() + randomDelay));
+            request.setTime( request.getTime() + randomDelay); //устанавливаем новое время события для заявки, в данном случае это время когда заявка покинет прибор
+            request.incrementRepeatCounter(); //так как заявка попала в ИПВ - увеличиваем счетчик для статистики
+            requests.Add(request);
         }
 
         internal int getRequestsCount() { //для статистики
             return requests.Count();
         }
 
+        internal List<Request> getRequests() //возвращаем список заявок в ИПВ, для статистики
+        {
+            return requests;
+        }
+
         internal Request getRequest() 
         {
             //изымаем ближайшую заявку с минимальным временем
             Request request = requests.Find(it => it.getTime() == getEventTime());
-            requests.Remove(request);
+            requests.Remove(request); //удаляем из списка ИПВ
             processedEventCount++; //увеличиваем число обработанных заявок, для статистики
             return request;
         }

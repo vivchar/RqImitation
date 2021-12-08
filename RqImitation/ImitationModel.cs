@@ -18,6 +18,10 @@ namespace RqImitation
         private RepeatStream repeatStream;
         private RandomEnviroment randomEnviroment;
 
+        private List<bool> successDeviceCalls = new List<bool>(); //статистика успешных и неуспешных обращений к прибору, статистика
+        private List<Request> finishedRequests = new List<Request>(); //список заявок покинувших систему, статистика
+        private List<bool> successSystemLeft = new List<bool>(); //статистика покинувших и непокинувших систему заявок
+
         double currentTime = 0;
 
         public ImitationModel(double lambda, double beta, double alpha, double gamma, List<double> mu1List, List<double> mu2List, List<List<int>> matrixQ)
@@ -43,7 +47,8 @@ namespace RqImitation
                 double repeatEventTime = repeatStream.getEventTime();
                 double deviceFinishEventTime = device.getEventTime();
                 double externalEventTime = device.isBusy() ? double.MaxValue : externalStream.getEventTime(currentTime);
-                
+
+                ImitationForm.Log("\t\t\t currentTime " + currentTime);
                 ImitationForm.Log("Random time:\t\t" + mapToUserFriendlyTime(randomEnviromentEventTime));
                 ImitationForm.Log("Incomming time:\t\t" + mapToUserFriendlyTime(incommingEventTime));
                 ImitationForm.Log("Repeat time:\t\t" + mapToUserFriendlyTime(repeatEventTime));
@@ -99,7 +104,43 @@ namespace RqImitation
 
                 ImitationForm.Log("");
             }
+
+            finishedRequests.ForEach(it => ImitationForm.Log("Work time of request " + mapToUserFriendlyTime(it.getTime() - it.getStartTime())));
+            double averageLeftSystemTime = finishedRequests.Sum(it => it.getTime() - it.getStartTime()) / finishedRequests.Count();
+
+            ImitationForm.Log("");
             ImitationForm.Log("Finishing...");
+
+            ImitationForm.Log("");
+            ImitationForm.Log("Статистика:");
+            ImitationForm.Log("");
+
+            double averageWorkTimeOfDevice = (double)device.getWorkTimes().Sum() / device.getWorkTimes().Count();
+            ImitationForm.Log("Среднее время, обработки заявки на приборе:\t" + mapToUserFriendlyTime(averageWorkTimeOfDevice));
+
+            ImitationForm.Log("Среднее время, за которое заявка покинет систему:\t" + mapToUserFriendlyTime(averageLeftSystemTime));
+
+            int successLeftCount = successSystemLeft.Where(it => it).Count();
+            int allLeftAttemps = successSystemLeft.Count();
+            ImitationForm.Log("Успешных выходов заявок из системы:\t\t" + successLeftCount + " из " + allLeftAttemps);
+            double probabilityOfLeftSystem = (float)successLeftCount / allLeftAttemps;
+            ImitationForm.Log("Вероятность выхода заявки из системы:\t\t" + mapToUserFriendlyTime(probabilityOfLeftSystem));
+
+            int allDeviceCallCount = successDeviceCalls.Count();
+            int successCallCount = successDeviceCalls.Where(it => it).Count();
+            double probabilityOfFreeDevice = (float)successCallCount / allDeviceCallCount;
+            ImitationForm.Log("Успешных обращений к прибору:\t\t\t" + successCallCount + " из " + allDeviceCallCount);
+            ImitationForm.Log("Вероятность застать девайс свободным:\t\t" + mapToUserFriendlyTime(probabilityOfFreeDevice));
+
+            ImitationForm.Log("Количество обращений во внешнюю среду:\t\t" + externalStream.getProcessedRequestsCount());
+
+
+            ImitationForm.Log("");
+            var allRequests = new List<Request>();
+            allRequests.AddRange(repeatStream.getRequests()); //добавляем заявки из ИПВ в общий список
+            allRequests.AddRange(finishedRequests); //добавляем заявки покинувшие систему в общий список
+                                                    //allRequests.Sum(it => it.getTime())/allRequests.Count();
+
             ImitationForm.Stop();
         }
 
@@ -110,9 +151,12 @@ namespace RqImitation
 
         private void processFinishedRequest(Request request) {
             bool willLeftSystem = random.NextDouble() > beta; //рассчитываем вероятность (1 - B), что заявка покинет систему
+            successSystemLeft.Add(willLeftSystem);//добавляем в статистику успешные и неуспешные выходы из системы
+
             if (willLeftSystem)
             {
                 ImitationForm.Log("\t\tRequest left a system.");
+                finishedRequests.Add(request);
             }
             else
             {
@@ -130,6 +174,8 @@ namespace RqImitation
         }
 
         private void callDeviceWithRequest(bool isIncomming, Request request) {
+            successDeviceCalls.Add(!device.isBusy()); //статистика успешных и неуспешных обращений к девайсу
+
             if (device.isBusy()) //проверяем занят ли девайс
             {
                 ImitationForm.Log("\t\tDevice is busy. Moving to RS. RS contains " + repeatStream.getRequestsCount() + "(+1) requests.");

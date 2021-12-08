@@ -316,7 +316,7 @@
             this.eventsCountNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.eventsCountNumericUpDown.TabIndex = 27;
             this.eventsCountNumericUpDown.Value = new decimal(new int[] {
-            10,
+            1000,
             0,
             0,
             0});

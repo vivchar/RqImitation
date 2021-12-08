@@ -22,11 +22,9 @@ namespace RqImitation
 
         internal double getEventTime(double currentTime)
         {
-            if (eventTime == 0)
-            {
-                //так как внешняя среда имеет свою интенсивность, мы должны обрабатывать только те события, когда девайс свободен, поэтому передаем текущее время всей системы
-                eventTime = currentTime - Math.Log(random.NextDouble()) / alpha;
-            }
+            //так как внешняя среда имеет свою интенсивность, мы должны обрабатывать только те события, когда девайс свободен, поэтому передаем текущее время всей системы
+            var randomDouble = random.NextDouble();
+            eventTime = currentTime - Math.Log(randomDouble) / alpha;
             return eventTime;
         }
 
@@ -39,7 +37,7 @@ namespace RqImitation
         {
             processedRequestsCount++;
             //не генерируем сл событие, так как зависим от занятости девайса и времени
-            return new Request(eventTime);
+            return new Request(eventTime); //создаем новую заявку, которая вызвалась прибором из внешней среды. Время - это время вызова заявки
         }
     }
 }
