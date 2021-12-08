@@ -56,6 +56,12 @@ namespace RqImitation
             return request;
         }
 
+        internal void Clear()
+        {
+            requests.Clear();
+            processedEventCount = 0;
+        }
+
         internal int getProcessedEventCount() //для статистики
         {
             return processedEventCount;   

@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.betaDescriptionLabel = new System.Windows.Forms.Label();
             this.lambdaDescriptionLabel = new System.Windows.Forms.Label();
             this.lambdaNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -48,6 +51,7 @@
             this.logsListBox = new System.Windows.Forms.ListBox();
             this.eventsCountLabel = new System.Windows.Forms.Label();
             this.eventsCountNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.statisticsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.lambdaNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alphaNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gammaNumericUpDown)).BeginInit();
@@ -55,6 +59,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.betaNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.matrixQDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventsCountNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statisticsChart)).BeginInit();
             this.SuspendLayout();
             // 
             // betaDescriptionLabel
@@ -254,7 +259,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 309);
+            this.label1.Location = new System.Drawing.Point(391, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(126, 13);
             this.label1.TabIndex = 21;
@@ -270,16 +275,16 @@
             this.matrixQDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.matrixQDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.matrixQDataGridView.ColumnHeadersVisible = false;
-            this.matrixQDataGridView.Location = new System.Drawing.Point(306, 309);
+            this.matrixQDataGridView.Location = new System.Drawing.Point(523, 7);
             this.matrixQDataGridView.Name = "matrixQDataGridView";
             this.matrixQDataGridView.RowHeadersVisible = false;
-            this.matrixQDataGridView.Size = new System.Drawing.Size(665, 424);
+            this.matrixQDataGridView.Size = new System.Drawing.Size(454, 223);
             this.matrixQDataGridView.TabIndex = 22;
             // 
             // startButton
             // 
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startButton.Location = new System.Drawing.Point(397, 654);
+            this.startButton.Location = new System.Drawing.Point(47, 337);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(179, 38);
             this.startButton.TabIndex = 23;
@@ -290,9 +295,9 @@
             // logsListBox
             // 
             this.logsListBox.FormattingEnabled = true;
-            this.logsListBox.Location = new System.Drawing.Point(381, 7);
+            this.logsListBox.Location = new System.Drawing.Point(264, 300);
             this.logsListBox.Name = "logsListBox";
-            this.logsListBox.Size = new System.Drawing.Size(590, 212);
+            this.logsListBox.Size = new System.Drawing.Size(707, 134);
             this.logsListBox.TabIndex = 25;
             // 
             // eventsCountLabel
@@ -321,11 +326,27 @@
             0,
             0});
             // 
+            // statisticsChart
+            // 
+            chartArea4.Name = "ChartArea1";
+            this.statisticsChart.ChartAreas.Add(chartArea4);
+            this.statisticsChart.Location = new System.Drawing.Point(15, 443);
+            this.statisticsChart.Name = "statisticsChart";
+            series4.ChartArea = "ChartArea1";
+            series4.Name = "Series4";
+            this.statisticsChart.Series.Add(series4);
+            this.statisticsChart.Size = new System.Drawing.Size(956, 311);
+            this.statisticsChart.TabIndex = 28;
+            this.statisticsChart.Text = "Статистика";
+            title4.Name = "Title1ываыва";
+            this.statisticsChart.Titles.Add(title4);
+            // 
             // ImitationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(983, 723);
+            this.ClientSize = new System.Drawing.Size(989, 766);
+            this.Controls.Add(this.statisticsChart);
             this.Controls.Add(this.eventsCountNumericUpDown);
             this.Controls.Add(this.eventsCountLabel);
             this.Controls.Add(this.logsListBox);
@@ -356,6 +377,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.betaNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.matrixQDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eventsCountNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.statisticsChart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -383,6 +405,7 @@
         private System.Windows.Forms.ListBox logsListBox;
         private System.Windows.Forms.Label eventsCountLabel;
         private System.Windows.Forms.NumericUpDown eventsCountNumericUpDown;
+        private System.Windows.Forms.DataVisualization.Charting.Chart statisticsChart;
     }
 }
 

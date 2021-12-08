@@ -37,6 +37,18 @@ namespace RqImitation
 
         internal void start(int eventsCount)
         {
+
+            successDeviceCalls.Clear();
+            finishedRequests.Clear();
+            successSystemLeft.Clear();
+            currentTime = 0;
+
+            device.Clear();
+            incommingStream.Clear();
+            externalStream.Clear();
+            repeatStream.Clear();
+            randomEnviroment.Clear();
+
             ImitationForm.Start();
             ImitationForm.Log("Starting...");
             ImitationForm.Log("");
@@ -105,11 +117,26 @@ namespace RqImitation
                 ImitationForm.Log("");
             }
 
-            finishedRequests.ForEach(it => ImitationForm.Log("Work time of request " + mapToUserFriendlyTime(it.getTime() - it.getStartTime())));
+            finishedRequests.ForEach(it => ImitationForm.Log("Время нахождения заявки в системе: " + mapToUserFriendlyTime(it.getTime() - it.getStartTime())));
             double averageLeftSystemTime = finishedRequests.Sum(it => it.getTime() - it.getStartTime()) / finishedRequests.Count();
 
             ImitationForm.Log("");
-            ImitationForm.Log("Finishing...");
+
+            var allRequests = new List<Request>();
+            allRequests.AddRange(repeatStream.getRequests()); //добавляем заявки из ИПВ в общий список
+            allRequests.AddRange(finishedRequests); //добавляем заявки покинувшие систему в общий список
+
+            ImitationForm.Log("Finish max IPV: " + finishedRequests.Max(it => it.getRepeatCounter()));
+            ImitationForm.Log("IPV max: " + repeatStream.getRequests().Max(it => it.getRepeatCounter()));
+
+            var list = new List<int>();
+            for (int i = 0; i <= allRequests.Max(it => it.getRepeatCounter()); i++)
+            {
+                var count = allRequests.Where(it => it.getRepeatCounter() == i).Count();
+                list.Add(count);
+                ImitationForm.Log(count + " заявок попали в ИПВ " + i + " раз ");
+            }
+            ImitationForm.UpdateChart(list);
 
             ImitationForm.Log("");
             ImitationForm.Log("Статистика:");
@@ -133,13 +160,7 @@ namespace RqImitation
             ImitationForm.Log("Вероятность застать девайс свободным:\t\t" + mapToUserFriendlyTime(probabilityOfFreeDevice));
 
             ImitationForm.Log("Количество обращений во внешнюю среду:\t\t" + externalStream.getProcessedRequestsCount());
-
-
             ImitationForm.Log("");
-            var allRequests = new List<Request>();
-            allRequests.AddRange(repeatStream.getRequests()); //добавляем заявки из ИПВ в общий список
-            allRequests.AddRange(finishedRequests); //добавляем заявки покинувшие систему в общий список
-                                                    //allRequests.Sum(it => it.getTime())/allRequests.Count();
 
             ImitationForm.Stop();
         }

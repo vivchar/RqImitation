@@ -39,5 +39,11 @@ namespace RqImitation
             //не генерируем сл событие, так как зависим от занятости девайса и времени
             return new Request(eventTime); //создаем новую заявку, которая вызвалась прибором из внешней среды. Время - это время вызова заявки
         }
+
+        internal void Clear()
+        {
+            eventTime = 0;
+            processedRequestsCount = 0;
+        }
     }
 }

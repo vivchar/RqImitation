@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RqImitation
 {
     public partial class ImitationForm : Form
     {
-        private static ListBox logsList;
+        private static ListBox logsListView;
+        private static System.Windows.Forms.DataVisualization.Charting.Series chartView;
         private static List<String> logs = new List<string>();
 
         public ImitationForm()
@@ -23,7 +17,11 @@ namespace RqImitation
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            logsList = logsListBox;
+            logsListView = logsListBox;
+            chartView = statisticsChart.Series[0];
+            statisticsChart.ChartAreas[0].AxisX.Title = "Количество попаданий в ИПВ";
+            statisticsChart.ChartAreas[0].AxisY.Title = "Количество заявок";
+
             updateStateCount();
         }
 
@@ -108,17 +106,18 @@ namespace RqImitation
         }
 
         public static void Start() {
-            logsList.DataSource = null;
+            logsListView.DataSource = null;
             logs.Clear();
-            logsList.Items.Clear();
-            logsList.BeginUpdate();
+            logsListView.Items.Clear();
+            logsListView.BeginUpdate();
+            chartView.Points.Clear();
         }
 
         public static void Stop() {
-            logsList.DataSource = logs;
-            logsList.EndUpdate();   
-            logsList.SelectedIndex = logsList.Items.Count - 1;
-            logsList.SelectedIndex = -1;
+            logsListView.DataSource = logs;
+            logsListView.EndUpdate();   
+            logsListView.SelectedIndex = logsListView.Items.Count - 1;
+            logsListView.SelectedIndex = -1;
         }
 
         public List<double> getMu1List()
@@ -162,6 +161,13 @@ namespace RqImitation
 
 
             return matrix;
+        }
+
+        internal static void UpdateChart(List<int> list)
+        {
+            for (int i = 0; i < list.Count; i++) {
+                chartView.Points.AddXY(i, list[i]);
+            }
         }
     }
 }

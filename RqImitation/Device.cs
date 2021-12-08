@@ -64,6 +64,14 @@ namespace RqImitation
             this.request = request;
         }
 
+        internal void Clear()
+        {
+            request = null;
+            processedRequestsCount = 0;
+            deviceState = 0;
+            workTimes.Clear();
+        }
+
         internal int getProcessedRequestsCount()
         {
             return processedRequestsCount;

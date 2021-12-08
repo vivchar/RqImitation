@@ -53,6 +53,14 @@ namespace RqImitation
             return eventTime;
         }
 
+        internal void Clear()
+        {
+            eventTime = 0;
+            state = 0;
+            nextState = 0;
+            processedEventsCount = 0;
+        }
+
         internal void generateNextEvent() //генерируем следующее событие
         {
             state = nextState; //в текущее событие записываем

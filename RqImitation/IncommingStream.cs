@@ -44,5 +44,11 @@ namespace RqImitation
             processedRequestsCount++; //увеличиваем число обработанных заявок
             return request;
         }
+
+        internal void Clear()
+        {
+            eventTime = 0;
+            processedRequestsCount = 0;
+        }
     }
 }
