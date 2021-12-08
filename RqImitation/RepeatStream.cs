@@ -36,7 +36,7 @@ namespace RqImitation
             requests.Add(new Request(request.getTime() + randomDelay));
         }
 
-        internal int getRequestsCount() { 
+        internal int getRequestsCount() { //для статистики
             return requests.Count();
         }
 
@@ -49,7 +49,7 @@ namespace RqImitation
             return request;
         }
 
-        internal int getProcessedEventCount()
+        internal int getProcessedEventCount() //для статистики
         {
             return processedEventCount;   
         }

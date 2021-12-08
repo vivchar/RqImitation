@@ -14,6 +14,8 @@ namespace RqImitation
     public partial class ImitationForm : Form
     {
         private static ListBox logsList;
+        private static List<String> logs = new List<string>();
+
         public ImitationForm()
         {
             InitializeComponent();
@@ -85,8 +87,6 @@ namespace RqImitation
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            logsList.Items.Clear(); //ощищаем лог предыдущей имитации
-
             double lambda = (double)lambdaNumericUpDown.Value;
             double beta = (double)betaNumericUpDown.Value;
             double alpha = (double)alphaNumericUpDown.Value;
@@ -103,11 +103,21 @@ namespace RqImitation
         }
 
         public static void Log(string message) {
-            Debug.WriteLine(message);
-            logsList.Items.Add(message);
+            //Debug.WriteLine(message);
+            logs.Add(message);
+        }
 
+        public static void Start() {
+            logsList.DataSource = null;
+            logs.Clear();
+            logsList.Items.Clear();
+            logsList.BeginUpdate();
+        }
+
+        public static void Stop() {
+            logsList.DataSource = logs;
+            logsList.EndUpdate();   
             logsList.SelectedIndex = logsList.Items.Count - 1;
-            logsList.SelectedIndex = -1;
         }
 
         public List<double> getMu1List()

@@ -33,6 +33,7 @@ namespace RqImitation
 
         internal void start(int eventsCount)
         {
+            ImitationForm.Start();
             ImitationForm.Log("Starting...");
             ImitationForm.Log("");
             for (int i = 1; i <= eventsCount; i++) {
@@ -99,6 +100,7 @@ namespace RqImitation
                 ImitationForm.Log("");
             }
             ImitationForm.Log("Finishing...");
+            ImitationForm.Stop();
         }
 
         private String mapToUserFriendlyTime(double time) {

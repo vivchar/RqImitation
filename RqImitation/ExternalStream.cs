@@ -30,7 +30,7 @@ namespace RqImitation
             return eventTime;
         }
 
-        internal int getProcessedRequestsCount()
+        internal int getProcessedRequestsCount() //для статистики
         {
             return processedRequestsCount;
         }

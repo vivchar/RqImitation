@@ -33,7 +33,7 @@ namespace RqImitation
             eventTime = eventTime - Math.Log(random.NextDouble()) / lambda;
         }
 
-        internal int getProcessedRequestsCount() { 
+        internal int getProcessedRequestsCount() { //статистика
             return processedRequestsCount;
         }
 
