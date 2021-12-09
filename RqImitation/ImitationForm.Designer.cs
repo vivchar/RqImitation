@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.betaDescriptionLabel = new System.Windows.Forms.Label();
             this.lambdaDescriptionLabel = new System.Windows.Forms.Label();
             this.lambdaNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -294,6 +294,8 @@
             // 
             // logsListBox
             // 
+            this.logsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.logsListBox.FormattingEnabled = true;
             this.logsListBox.Location = new System.Drawing.Point(264, 300);
             this.logsListBox.Name = "logsListBox";
@@ -328,18 +330,21 @@
             // 
             // statisticsChart
             // 
-            chartArea4.Name = "ChartArea1";
-            this.statisticsChart.ChartAreas.Add(chartArea4);
+            this.statisticsChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea2.Name = "ChartArea1";
+            this.statisticsChart.ChartAreas.Add(chartArea2);
             this.statisticsChart.Location = new System.Drawing.Point(15, 443);
             this.statisticsChart.Name = "statisticsChart";
-            series4.ChartArea = "ChartArea1";
-            series4.Name = "Series4";
-            this.statisticsChart.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Name = "Series4";
+            this.statisticsChart.Series.Add(series2);
             this.statisticsChart.Size = new System.Drawing.Size(956, 311);
             this.statisticsChart.TabIndex = 28;
             this.statisticsChart.Text = "Статистика";
-            title4.Name = "Title1ываыва";
-            this.statisticsChart.Titles.Add(title4);
+            title2.Name = "Title1ываыва";
+            this.statisticsChart.Titles.Add(title2);
             // 
             // ImitationForm
             // 

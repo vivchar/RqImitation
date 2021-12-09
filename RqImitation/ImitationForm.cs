@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace RqImitation
@@ -22,6 +23,7 @@ namespace RqImitation
             statisticsChart.ChartAreas[0].AxisX.Title = "Количество попаданий в ИПВ";
             statisticsChart.ChartAreas[0].AxisY.Title = "Количество заявок";
             statisticsChart.ChartAreas[0].AxisX.LabelStyle.Angle = -90;
+            statisticsChart.ChartAreas[0].AxisX.LabelStyle.Font = new Font("Arial", 8, FontStyle.Regular);
             statisticsChart.ChartAreas[0].AxisX.Interval = 1;
 
             updateStateCount();
