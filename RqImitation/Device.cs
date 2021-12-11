@@ -15,7 +15,7 @@ namespace RqImitation
         private List<double> mu1List; //список мю для входящих заявок, зависит от числа состояний случайной среды S
         private List<double> mu2List; //список мю для вызываемых заявок, зависит от числа состояний случайной среды S
 
-        private List<double> workTimes = new List<double>();
+        private List<double> workTimes = new List<double>(); //для статистики, список времен обработок заявок
 
         private int processedRequestsCount = 0; //для статистики
 
