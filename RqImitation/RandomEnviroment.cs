@@ -10,6 +10,8 @@ namespace RqImitation
     internal class RandomEnviroment
     {
         private Random random;
+        private ExponentialGenerator exponentialGenerator;
+
         private List<List<int>> matrixQ; //матрица переходов
         private List<List<double>> matrixTransitions = new List<List<double>>();//матрица переходов вероятностей
         private int state = 0; //текущее состояние среды
@@ -17,8 +19,9 @@ namespace RqImitation
         private double eventTime = 0;//когда наступит следующее событие
         private int processedEventsCount = 0;//для статистики
 
-        public RandomEnviroment(Random random, List<List<int>> matrixQ)
+        public RandomEnviroment(ExponentialGenerator exponentialGenerator, Random random, List<List<int>> matrixQ)
         {
+            this.exponentialGenerator = exponentialGenerator;
             this.random = random;
             this.matrixQ = matrixQ;
             calculateMatrixTransitions();
@@ -64,7 +67,8 @@ namespace RqImitation
         internal void generateNextEvent() //генерируем следующее событие
         {
             state = nextState; //в текущее событие записываем
-            eventTime = eventTime + Math.Log(random.NextDouble()) / matrixQ[state][state];
+
+            eventTime = eventTime + exponentialGenerator.generate(matrixQ[state][state]);
 
             nextState = 0;
             double A = random.NextDouble() - matrixTransitions[state][nextState]; //высчитываем вероятность и какое событие будет следующее

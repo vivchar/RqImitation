@@ -9,14 +9,14 @@ namespace RqImitation
     //источник повторных вызовов
     internal class RepeatStream
     {
-        private Random random;
+        private ExponentialGenerator exponentialGenerator;
         private double gamma;
         private List<Request> requests = new List<Request>();
         private int processedEventCount = 0; //для статистики
 
-        public RepeatStream(Random random, double gamma)
+        public RepeatStream(ExponentialGenerator exponentialGenerator, Random random, double gamma)
         {
-            this.random = random;
+            this.exponentialGenerator = exponentialGenerator;
             this.gamma = gamma;
         }
 
@@ -31,7 +31,7 @@ namespace RqImitation
 
         internal void addRequest(Request request) //добавляет заявку в ИПВ и генерирует случайную задержку для повторного вызова
         {
-            double randomDelay = Math.Abs(Math.Log(random.NextDouble()) / gamma);
+            double randomDelay = Math.Abs(exponentialGenerator.generate(gamma));
             //double randomDelay = random.NextDouble();
             request.setTime( request.getTime() + randomDelay); //устанавливаем новое время события для заявки, в данном случае это время когда заявка покинет прибор
             request.incrementRepeatCounter(); //так как заявка попала в ИПВ - увеличиваем счетчик для статистики

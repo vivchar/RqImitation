@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Device.cs" />
+    <Compile Include="ExponentialGenerator.cs" />
     <Compile Include="ExternalStream.cs" />
     <Compile Include="ImitationForm.cs">
       <SubType>Form</SubType>

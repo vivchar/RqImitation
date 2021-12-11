@@ -9,13 +9,13 @@ namespace RqImitation
     //входящий пуассоновский поток
     internal class IncommingStream
     {
-        private Random random;
+        private ExponentialGenerator exponentialGenerator;
         private double lambda;
         private double eventTime = 0;
         private int processedRequestsCount = 0;  //для статистики, сколько событий обработано
 
-        internal IncommingStream(Random random, double lambda) {
-            this.random = random;
+        internal IncommingStream(ExponentialGenerator exponentialGenerator, double lambda) {
+            this.exponentialGenerator = exponentialGenerator;
             this.lambda = lambda;
         }
 
@@ -30,7 +30,7 @@ namespace RqImitation
 
         internal void generateNextEvent() // функция генерирует следующее событие
         {
-            eventTime = eventTime - Math.Log(random.NextDouble()) / lambda;
+            eventTime = eventTime - exponentialGenerator.generate(lambda);
         }
 
         internal int getProcessedRequestsCount() { //статистика

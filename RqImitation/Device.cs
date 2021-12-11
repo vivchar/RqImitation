@@ -11,7 +11,7 @@ namespace RqImitation
     {
         private Request request = null;
 
-        private Random random;
+        private ExponentialGenerator exponentialGenerator;
         private List<double> mu1List; //список мю для входящих заявок, зависит от числа состояний случайной среды S
         private List<double> mu2List; //список мю для вызываемых заявок, зависит от числа состояний случайной среды S
 
@@ -21,9 +21,9 @@ namespace RqImitation
 
         private int deviceState = 0; //состояние девайса 0,1,2
 
-        public Device(Random random, List<double> mu1List, List<double> mu2List)
+        public Device(ExponentialGenerator exponentialGenerator, List<double> mu1List, List<double> mu2List)
         {
-            this.random = random;
+            this.exponentialGenerator = exponentialGenerator;
             this.mu1List = mu1List;
             this.mu2List = mu2List;
         }
@@ -53,7 +53,7 @@ namespace RqImitation
             deviceState = isIncomming ? 1 : 2;
             //если заявка из входящего потока или из ИПВ, то используем параметр mu1, если это заявка вызываемая заявка из внешней среды, то используем параметр mu2
             double parameter = isIncomming ? mu1List[state] : mu2List[state];
-            double workTime = Math.Abs(Math.Log(random.NextDouble()) / parameter); //время сколько будет обрабатываться заявка, время работы прибора
+            double workTime = Math.Abs(exponentialGenerator.generate(parameter)); //время сколько будет обрабатываться заявка, время работы прибора
             double startTime = request.getTime(); //время когда прибор начал работать
             double endTime = startTime + workTime; //время когда прибор закончит работать
 

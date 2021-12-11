@@ -17,6 +17,7 @@ namespace RqImitation
         private IncommingStream incommingStream;
         private RepeatStream repeatStream;
         private RandomEnviroment randomEnviroment;
+        private ExponentialGenerator exponentialGenerator;
 
         private List<bool> successDeviceCalls = new List<bool>(); //статистика успешных и неуспешных обращений к прибору, статистика
         private List<Request> finishedRequests = new List<Request>(); //список заявок покинувших систему, статистика
@@ -28,11 +29,14 @@ namespace RqImitation
         {
             this.beta = beta;
 
-            incommingStream = new IncommingStream(random, lambda);
-            repeatStream = new RepeatStream(random, gamma);
-            externalStream = new ExternalStream(random, alpha);
-            device = new Device(random, mu1List, mu2List);
-            randomEnviroment = new RandomEnviroment(random, matrixQ);
+            exponentialGenerator = new ExponentialGenerator(random);
+
+            incommingStream = new IncommingStream(exponentialGenerator, lambda);
+            repeatStream = new RepeatStream(exponentialGenerator, gamma);
+            externalStream = new ExternalStream(exponentialGenerator, alpha);
+            device = new Device(exponentialGenerator, mu1List, mu2List);
+            randomEnviroment = new RandomEnviroment(exponentialGenerator, random, matrixQ);
+            
         }
 
         internal void start(int eventsCount)
