@@ -14,7 +14,7 @@ namespace RqImitation
         private List<Request> requests = new List<Request>();
         private int processedEventCount = 0; //для статистики
 
-        public RepeatStream(ExponentialGenerator exponentialGenerator, Random random, double gamma)
+        public RepeatStream(ExponentialGenerator exponentialGenerator, double gamma)
         {
             this.exponentialGenerator = exponentialGenerator;
             this.gamma = gamma;
